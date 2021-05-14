@@ -1,0 +1,48 @@
+/*
+Reading Morse Code - Assignment 
+*/
+
+#include "MicroBit.h"
+
+MicroBit uBit;
+//defining the characteristics  
+
+int Lighty;
+char lightChar;
+
+
+int main()
+{
+    // Initialise the micro:bit runtime.
+    uBit.init();
+//communicating from the microbit to the putty softwear 
+    uBit.init();
+    uBit.serial.baud(115200);
+
+//This section allows the microbit to read the light levels
+    
+    while(1)
+    {
+        
+        Lighty=uBit.display.readLightLevel(); 
+        uBit.serial.printf("Light = %d ", Lighty);
+        /*
+        if(Lighty>=20)
+        { 
+        
+        uBit.serial.printf("%d " Lighty);
+        }
+        
+        if(Lighty<20)
+        { 
+        
+        uBit.serial.printf("-");
+        
+        
+        }
+        */
+        uBit.sleep(300);
+        
+    }
+        
+}
