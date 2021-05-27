@@ -1,0 +1,66 @@
+/*
+Reading Morse Code - Assignment 
+*/
+
+#include "MicroBit.h"
+
+MicroBit uBit;
+//defining the characteristics  
+
+int Lighty;
+char lightChar;
+int cON =0; //defining the first counter 
+int cOFF = 0; //defining the second counter 
+
+
+int main()
+{
+    // Initialise the micro:bit runtime.
+    uBit.init();
+//communicating from the microbit to the putty softwear 
+    uBit.init();
+    uBit.serial.baud(115200);
+
+//creating a while loop 
+    
+    while(1)
+    {
+        //This section allows the microbit to read the light levels and display them through the putty app
+        Lighty=uBit.display.readLightLevel(); 
+       //uBit.serial.printf("Light = %d ", Lighty);
+        
+        //If loop created to allow levels to be categorised 
+        if(Lighty<=20)
+        { 
+        cOFF++; //First counter to start counting if the light is below or equal to 20 should go up by 1 every time it is dark 
+        
+         
+         cOFF=5&& cON>0;  // when the counter has 5 counts of light off and counter on has 0 counts then display a dot
+                          
+        
+       uBit.serial.printf("off"); //when light is below 20 display 'OFF'
+        uBit.serial.printf("."); //when light is below 20 display '.'
+        
+        }
+        
+        if(Lighty>20)
+        { 
+        cON++; //Second counter to start counting if the light is above 20, should go up by 1 every time its light 
+        
+      
+   cON=5&& cOFF>0; //when the counter has 5 counts of light on and count off has 0 counts then display a dash
+        
+        uBit.serial.printf("-");
+        
+        uBit.serial.printf("on");
+         
+         
+        
+        }
+        
+        
+        uBit.sleep(300);
+        
+        
+        
+    }
